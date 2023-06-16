@@ -1,0 +1,664 @@
+/* Define variables for colors */
+:root {
+  --background-color: #fff, #5CC3EB, #128AAC, #126896;
+  --bg-color-rules: #D3D3D3;
+  --bg-color-island-steps: #FFE2D0;
+
+  --island-border: #EBC8A1;
+  --island-shadow: #BEC7B7;
+  --ocean: #128AAC;
+
+  --step-r: #EBC8A1;
+  --step-w: #4D4D4D;
+
+  --text-color: #29292c;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* ###################################################### */
+/*                       General Rules                    */
+/* ###################################################### */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  max-height: 100%;
+  max-width: 100%;
+}
+
+@font-face {
+  font-family: kiddy;
+  src: url(../assets/fonts/Kiddy\ Play.ttf);
+}
+
+body {
+  background: radial-gradient(var(--background-color));
+  padding: 0.5%;
+
+  font-family: kiddy, Helvetica, sans-serif;
+  color: var(--text-color);
+  letter-spacing: 1px;
+
+  overflow-x: hidden;
+}
+
+main {
+  height: 88vh;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h1,
+h2,
+h1+p {
+  text-align: center;
+}
+
+p {
+  padding: 5px;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 10px;
+
+  align-items: end;
+
+  grid-template-areas:
+    ". rules";
+}
+
+/* ###################################################### */
+/*                        Main elements                   */
+/* ###################################################### */
+
+.container__title {
+  grid-area: container__title;
+}
+
+.container {
+  position: relative;
+
+  display: grid;
+  gap: 2% 2%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+  grid-template-areas:
+    "container__title container__title container__title"
+    ". island ."
+    ". island ."
+    ". . .";
+
+  height: 80%;
+  width: 100%;
+}
+
+.container__grid {
+  position: relative;
+  grid-area: island;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 3px;
+  grid-row-gap: 3px;
+
+  height: 75vh;
+  width: 75vh;
+
+  background-color: var(--bg-color-island-steps);
+  border: solid 10px var(--island-border);
+  box-shadow: 0 20px 50px 30px var(--island-shadow);
+  border-radius: 62% 38% 60% 40% / 56% 66% 34% 44%;
+  padding: 14vh;
+
+  z-index: 1;
+}
+
+.tile {
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  border: solid 1px var(--island-border);
+  transition: 0.5s;
+
+  z-index: 50;
+}
+
+.tile:nth-child(1) {
+  background: var(--step-r);
+  font-size: 14px;
+}
+
+.tile:nth-child(1),
+.w {
+  padding-top: 18px;
+}
+
+.r:hover {
+  background: var(--step-r);
+}
+
+.w:hover {
+  background: var(--step-w);
+}
+
+.w:hover::before {
+  content: "✖";
+}
+
+.exit {
+  position: relative;
+  color: var(--bg-color-island-steps);
+}
+
+.exit:hover {
+  background-color: var(--step-r);
+}
+
+/*MODAL*/
+/*Removes the checkbox*/
+input[type="checkbox"],
+#modal {
+  display: none;
+}
+
+/*sets the display property to block when the checkbox is checked/clicked*/
+input[type="checkbox"]:checked~.modal,
+input[type="checkbox"]:checked~.rules__modal-background {
+  display: block;
+}
+
+/*gives a semi-transparent background and is positioned fixed to cover the entire viewport*/
+.rules__modal-background {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+
+  height: 100%;
+  width: 100%;
+
+  top: 0;
+  left: 0;
+
+  z-index: 3;
+}
+
+/*takes up the entire viewport. It has a z-index higher than the modal background to ensure that it appears on top*/
+.modal {
+  position: fixed;
+  display: none;
+  background-color: var(--bg-color-rules);
+
+  padding: 80px;
+  margin: auto;
+  /*shorthand for setting the top, right, bottom, and left properties at once.*/
+  inset: 0;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 62% 38% 60% 40% / 56% 66% 34% 44%;
+
+  z-index: 20;
+}
+
+.modal>p {
+  padding: 12px;
+  font-size: 17px;
+}
+
+span {
+  padding: 2%;
+  color: transparent;
+  text-shadow: 0 0 0 #128AAC;
+}
+
+.rules__thumbs-up {
+  background-color: var(--step-r);
+}
+
+.rules__thumbs-down {
+  background-color: var(--step-w);
+}
+
+.close {
+  background-color: var(--bg-color-island-steps);
+  height: fit-content;
+}
+
+/*positions the close button to the right*/
+.close label {
+  float: right;
+  line-height: 50px;
+  padding: 0 15px 0 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.close label:hover {
+  opacity: 0.5;
+}
+
+.rules {
+  grid-area: rules;
+}
+
+/* styling for the rules button */
+.rules__button {
+  display: inline-block;
+  padding: 25px;
+
+  background-color: var(--bg-color-rules);
+  border-radius: 62% 38% 60% 40% / 56% 66% 34% 44%;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* styling when hovering rules button */
+.rules__button:hover {
+  opacity: 0.9;
+  text-decoration: underline;
+}
+
+/* ###################################################### */
+/*                Decorations and animations              */
+/* ###################################################### */
+
+/*WAVES*/
+.waves {
+  position: absolute;
+  background: var(--bg-color-island-steps);
+
+  text-align: center;
+
+  width: 81vh;
+  height: 85vh;
+
+  top: 99px;
+
+  border-radius: 62% 38% 60% 40% / 56% 66% 34% 44%;
+
+  animation: wave ease-in-out 7s infinite
+}
+
+@keyframes wave {
+
+  0%,
+  50%,
+  100% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.2;
+  }
+}
+
+/*TREASURE CHEST*/
+.treasure-chest {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  animation: rotate 3s ease-in-out;
+  opacity: 0.1;
+
+  z-index: 1;
+}
+
+.exit:hover>.treasure-chest {
+  opacity: 1;
+}
+
+/*intro when entering the page*/
+@keyframes rotate {
+  0% {
+    transform: scale(10) rotate(0deg) translateX(-20%) translateY(-40%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 0.1;
+  }
+}
+
+/*SHARK*/
+.shark,
+.shark__two {
+  --shark: #AEB9BF;
+  --shark-shadow: #73848C;
+  --shark-border: #95A4AD;
+
+  position: absolute;
+  background: linear-gradient(354deg, rgba(174, 185, 191, 1) 0%, rgba(115, 132, 140, 1) 35%, rgba(114, 125, 129, 1) 100%);
+
+  border-radius: 9px;
+  border: solid 2px var(--shark-border);
+  filter: drop-shadow(1px 1px 1px var(--white));
+
+  height: 40px;
+  width: 50px;
+
+  z-index: -1;
+
+  /* name | duration | timing-function | iteration-count*/
+  animation: swim 40s linear infinite;
+}
+
+.shark {
+  clip-path: polygon(23% 28%, 0% 100%, 100% 100%);
+
+  top: 110px;
+  left: 60px;
+
+  z-index: -1;
+
+  /* name | duration | timing-function | iteration-count*/
+  animation: swim 40s linear infinite;
+}
+
+.shark__two {
+  clip-path: polygon(79% 36%, 0% 100%, 100% 100%);
+
+  bottom: -80px;
+  right: 60px;
+
+  animation-direction: reverse;
+  animation-duration: 50s;
+}
+
+/* Starting on the left side and moves to the right. It changes its vertical position with transform: translateY(). Opacity and scale are also animated */
+
+@keyframes swim {
+  0% {
+    left: 0;
+    transform: translateY(-100%);
+  }
+
+  25% {
+    left: 25%;
+    transform: translateY(30%);
+  }
+
+  50% {
+    left: 50%;
+    transform: translateY(-50%);
+  }
+
+  75% {
+    left: 75%;
+    transform: translateY(30%);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateY(100%);
+  }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+
+/*PALM TREE*/
+.palm-tree {
+  position: fixed;
+  transform: scale(0.5);
+
+  top: 45%;
+  left: 2%;
+
+  z-index: 1;
+
+  filter: drop-shadow(6px 5px 4px var(--step-w));
+}
+
+.palm-tree.two {
+  top: -70px;
+  left: 1200px;
+
+  transform: scale(0.3) rotate(-4deg);
+}
+
+.palm-tree__leaf {
+  --leaf-light: #76B711;
+  --leaf-dark: #39AB10;
+  position: relative;
+  background: var(--leaf-dark);
+
+  border-radius: 5% 100% 0% 100% / 0% 100% 0% 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-left: 4px solid #96C34C;
+
+  height: 100px;
+  width: 130px;
+}
+
+.palm-tree__leaf:nth-child(2) {
+  background: var(--leaf-light);
+  transform: rotate(115deg);
+  top: -115px;
+  left: 105px;
+}
+
+.palm-tree__leaf:nth-child(3) {
+  background: var(--leaf-dark);
+  transform: rotate(-20deg);
+  top: -140px;
+  left: 110px;
+
+  height: 95px;
+  width: 122px;
+}
+
+.palm-tree__leaf:nth-child(4) {
+  background: var(--leaf-light);
+  transform: rotate(290deg);
+  top: -220px;
+  left: 7px;
+
+  height: 90px;
+  width: 110px;
+}
+
+.palm-tree__leaf::after {
+  content: '';
+  position: absolute;
+  border-left: 2px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 20px solid var(--ocean);
+  transform: rotate(65deg);
+
+  top: 20px;
+  left: 0;
+}
+
+.palm-tree__leaf:nth-child(3)::after {
+  transform: rotate(65deg);
+  top: 65px;
+  left: 50px;
+  border-bottom: 20px solid var(--island-border);
+}
+
+.palm-tree__leaf:nth-child(4)::after {
+  border-bottom: 20px solid var(--island-border)
+}
+
+.palm-tree__coconut {
+  --coconut: #5D3C02;
+  --coconut-shadow: #6A4502;
+  position: relative;
+  background: var(--coconut);
+  border-radius: 50%;
+  border-left: 5px solid var(--coconut-shadow);
+
+  width: 30px;
+  height: 30px;
+
+  top: -330px;
+  left: 85px;
+}
+
+.palm-tree__coconut:nth-child(6) {
+  top: -335px;
+  left: 92px;
+
+  width: 33px;
+  height: 32px;
+}
+
+.palm-tree__coconut:nth-child(7) {
+  top: -390px;
+  left: 110px;
+
+  width: 32px;
+  height: 34px;
+}
+
+.palm-tree__trunk {
+  --trunk-light: #A45B17;
+  --trunk-dark: #843C02;
+  position: relative;
+  background: repeating-radial-gradient(circle at top,
+      var(--trunk-light),
+      var(--trunk-light) 8px,
+      var(--trunk-dark) 15px,
+      var(--trunk-dark) 9px);
+  border-radius: 90% 20% / 10% 30%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+  transform: translateX(-50%);
+  transform: rotate(-7deg);
+
+  top: -390px;
+  left: 107px;
+
+  width: 30px;
+  height: 70px;
+
+  z-index: -2;
+}
+
+.palm-tree__sand {
+  position: relative;
+  background: var(--bg-color-island-steps);
+  border-radius: 50%;
+  box-shadow: 0 10px 50px 10px var(--island-shadow);
+  border: solid 10px var(--island-border);
+  width: 400px;
+  height: 100px;
+
+  top: -420px;
+  left: -60px;
+  z-index: -3;
+}
+
+/* ###################################################### */
+/*                    Different screens                */
+/* ###################################################### */
+@media only screen and (max-width: 1100px) {
+  .palm-tree {
+    transform: scale(0.4);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .palm-tree {
+    transform: scale(0.2);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  main {
+    height: 85vh;
+  }
+
+  h1,
+  h2,
+  h1+p {
+    inline-size: 350px;
+  }
+
+  .container__grid {
+    height: 43vh;
+    width: 43vh;
+
+    padding: 8vh;
+  }
+
+  .tile:nth-child(1),
+  .tile:nth-child(48) {
+    font-size: 40%;
+  }
+
+  .tile:nth-child(1),
+  .w {
+    padding-top: 3px;
+  }
+
+  .modal {
+    padding: 20% 14%;
+    margin: auto 1%;
+    width: 90%;
+  }
+
+  .waves {
+    height: 48vh;
+    width: 46vh;
+
+    top: 180px;
+  }
+
+  .shark {
+    top: 180px;
+    left: 20px;
+    transform: scale(0.6);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  footer {
+    text-align: center;
+    grid-template-areas:
+      "rules"
+      ".";
+  }
+
+  .w:hover::before {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  .palm-tree {
+    top: 280px;
+    left: -100px;
+  }
+}

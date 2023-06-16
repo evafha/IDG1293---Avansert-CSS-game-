@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Memory Game. Find the treasure!">
+  <meta name="keywords" content="Memory Game">
+  <meta name="author" content="Eva Fossen Haugum">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/treasure-chest.png">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Treasure Hunt</title>
+</head>
+
+<body>
+  <main>
+    <!-- header -->
+    <div class="container">
+      <div class="container__title">
+        <h1>Find the path to the treasure!</h1>
+        <p>(PS: for the best experience it is recommended playing on a screen wider than 900px)</p>
+      </div>
+
+      <!-- playboard -->
+      <div class="container__grid">
+        <!-- 1 -->
+        <div class="tile">START</div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+
+        <!-- 2 -->
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+
+        <!-- 3 -->
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+
+        <!-- 4 -->
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+
+        <!-- 5 -->
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+
+        <!-- 6 -->
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+
+        <!-- 7 -->
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile r"></div>
+        <div class="tile w"></div>
+
+        <!-- treasure chest location -->
+        <div class="tile exit">Goal
+          <img class="treasure-chest" src="assets/images/treasure-chest.png" alt="treasure chest">
+          <!-- i had major issues implementing the code for the treasure chest, so I ended up using a picture of it, but I have the link under -->
+        <!-- link to the treasure chest: https://codepen.io/evafha/pen/mdzPMBz?editors=1100 -->
+        </div>
+        <div class="tile w"></div>
+      </div>
+
+      <!-- animated elements/decorations -->
+      <div class="waves"></div>
+
+      <div class="shark"></div>
+
+      <div class="shark__two"></div>
+    </div>
+
+    <div class="palm-tree">
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+
+      <div class="palm-tree__coconut"></div>
+      <div class="palm-tree__coconut"></div>
+      <div class="palm-tree__coconut"></div>
+
+      <div class="palm-tree__trunk"></div>
+
+      <div class="palm-tree__sand"></div>
+    </div>
+
+    <div class="palm-tree two">
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+      <div class="palm-tree__leaf"></div>
+
+      <div class="palm-tree__coconut"></div>
+      <div class="palm-tree__coconut"></div>
+      <div class="palm-tree__coconut"></div>
+
+      <div class="palm-tree__trunk"></div>
+
+      <div class="palm-tree__sand"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&#169; Eva Fossen Haugum</p>
+
+    <!-- rules -->
+    <div class="rules">
+      <input type="checkbox" id="modal">
+
+      <label for="modal" class="rules__button">View rules</label>
+
+      <label for="modal" class="rules__modal-background"></label>
+
+      <!-- rules instructions-->
+      <div class="modal close">
+        <label for="modal">&times;</label>
+        <h2>Rules</h2>
+        <p>This will challenge your ability to remember, to make most out of the game, dont cheat!</p>
+        <p>Rules are simple. Use the mouse to <u>hover</u> over a tile. Directions are &#11014; &#10145; &#11015; &#11013;
+          (not diagonally)</p>
+        <p> <span class="rules__thumbs-up">&#128077;</span> BEIGE = okey to tile</p>
+        <p><span class="rules__thumbs-down">&#128078;</span> BLACK/CROSS = <u>Not</u> okey to tile</p>
+        <p>If you encounter the wrong tile, go back to the beginning and try again until you get to the treasure chest!</p>
+      </div>
+    </div>
+
+  </footer>
+</body>
+
+</html>
